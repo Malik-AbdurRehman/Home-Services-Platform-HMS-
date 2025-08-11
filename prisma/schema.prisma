@@ -14,18 +14,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  clerkUserId   String   @unique
-  firstName String?
-  lastName  String?
-  email     String   @unique
-  imageUrl  String?
-  phoneNumber String?
-  about   String?
-  role     String   @default("user")
+  id           String     @id @default(uuid())
+  clerkUserId  String  @unique
+  email        String  @unique
+  name        String?
+  role         String  @default("user")
+  imageUrl     String?
+  address      String?
+  about        String?
   Request     Request[]
-  createdAt DateTime @default(now())
-  address   String?
 }
 
 model Request {
