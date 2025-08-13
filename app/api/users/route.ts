@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     } = payload.data;
 
     const email = email_addresses?.[0]?.email_address;
-    const role = public_metadata?.role || "customer"; 
+    const role = public_metadata?.role 
     const address = public_metadata?.address || null;
     const about = public_metadata?.about || null;
 

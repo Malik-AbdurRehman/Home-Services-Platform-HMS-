@@ -9,7 +9,7 @@ export default function Home() {
           <SignOutButton/>
         </SignedIn>
         <SignedOut>
-          <div className="flex space-x-">
+          <div className="flex space-x-4">
             <SignInButton/>
             <SignUpButton/>
           </div>

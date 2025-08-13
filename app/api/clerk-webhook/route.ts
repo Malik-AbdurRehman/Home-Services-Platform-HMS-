@@ -17,26 +17,34 @@ export async function POST(req: NextRequest) {
     const about = public_metadata?.about || "N/A";
 
     // Store user in DB
-     await prisma.user.upsert({
-      where: { clerkUserId: id },
-      update: {
-        email,
-        name,
-        role,
-        imageUrl: image_url || "",
-        address,
-        about,
-      },
-      create: {
-        clerkUserId: id,
-        email,
-        name,
-        role,
-        imageUrl: image_url || "",
-        address,
-        about,
-      },
-    });
+    const existingUserByEmail = await prisma.user.findUnique({ where: { email } });
+
+if (existingUserByEmail) {
+  await prisma.user.update({
+    where: { email },
+    data: {
+      clerkUserId: id,
+      name,
+      role,
+      imageUrl: image_url || "",
+      address,
+      about,
+    },
+  });
+} else {
+  await prisma.user.create({
+    data: {
+      clerkUserId: id,
+      email,
+      name,
+      role,
+      imageUrl: image_url || "",
+      address,
+      about,
+    },
+  });
+}
+
 
     return NextResponse.json({ message: "User inserted successfully" }, { status: 200 });
   } catch (err) {
