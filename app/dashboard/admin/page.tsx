@@ -1,14 +1,4 @@
-import { checkRole } from '@/utils/roles'
-import { redirect } from 'next/navigation'
-
 export default async function AdminDashboard() {
-  // Protect the page from users who are not admins
-  const isAdmin = await checkRole('admin') 
-  if (!isAdmin) {
-    redirect('/')
-  }
-  console.log('Admin dashboard accessed by an admin user')
-
   return(
     <div className="container mx-auto p-4 text-center">
       <p className='text-3xl mb-4'>Admin Dashboard</p>

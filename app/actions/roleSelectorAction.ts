@@ -26,13 +26,13 @@ export const handleSubmitAction = async (formData: FormData) => {
     })
 
     if(role === 'customer') {
-      redirect('/customer');
+      redirect('/dashboard/customer');
     }
     else if(role === 'merchant') {
-      redirect('/merchant');
+      redirect('/dashboard/merchant');
     }
     else if(role === 'admin') {
-      redirect('/admin');
+      redirect('/dashboard/admin');
     }
     else {
       redirect('/');
