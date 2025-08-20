@@ -11,13 +11,12 @@ export default function RoleSelectionPage() {
     };
     
     return (
-        <div className="container mx-auto p-4 text-center">
-        <h1 className="text-3xl mb-4">Select Your Role</h1>
+        <div>
+        <h1>Select Your Role</h1>
         <form action={handleSubmitAction}>
             <select 
             value={selectedRole} 
-            onChange={handleRoleChange} 
-            className="border p-2 rounded"
+            onChange={handleRoleChange}
             id='role-select'
             name='role-select'
             >
@@ -25,7 +24,7 @@ export default function RoleSelectionPage() {
             <option value="merchant">Merchant</option>
             <option value="customer">Customer</option>
             </select>
-            <button type="submit" className="ml-4 p-2 bg-blue-500 text-white rounded">
+            <button type="submit">
             Submit
             </button>
         </form>

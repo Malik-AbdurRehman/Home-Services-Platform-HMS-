@@ -22,19 +22,8 @@ export const handleSubmitAction = async (formData: FormData) => {
       clerkUserId: userId,
       role,
       email: (await client.users.getUser(userId)).emailAddresses[0]?.emailAddress || '',
+      type: 'N/A',
     }
     })
-
-    if(role === 'customer') {
-      redirect('/dashboard/customer');
-    }
-    else if(role === 'merchant') {
-      redirect('/dashboard/merchant');
-    }
-    else if(role === 'admin') {
-      redirect('/dashboard/admin');
-    }
-    else {
-      redirect('/');
-    }
+    redirect('/dashboard');
 };

@@ -1,39 +1,35 @@
 import { auth } from "@clerk/nextjs/server";
-import {PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
+import AdminDashboard from "../components/adminDashboard";
+import MerchantDashboard from "../components/merchantDashboard";
+import CustomerDashboard from "../components/customerDashboard";
 
+const prisma = new PrismaClient();
 
-const  prisma= new PrismaClient();
-export default async function Dashboard(){
+export default async function Dashboard() {
+  const { userId } = await auth();
 
-    const {userId}= await auth();
-    if(!userId){
-        return("/auth/sign-in")
-    }
+  if (!userId) {
+    redirect("/auth/sign-in");
+  }
 
-    const user = await prisma.user.findUnique({
-        where: {
-            clerkUserId: userId,
-        },
-    }); 
-    console.log(user);
-    if(!user?.role){
-        redirect('components/role-selection');
-    }
+  const user = await prisma.user.findUnique({
+    where: {
+      clerkUserId: userId,
+    },
+  });
 
-    else if(user.role === 'admin'){
-        redirect('/dashboard/admin');
-    }
-    else if(user.role === 'merchant'){
-        redirect('/dashboard/merchant');
-    }
-    else if(user.role === 'customer'){
-        redirect('/dashboard/customer');
-    }
+  let content;
+  if (!user?.role) {
+    redirect("/components/role-selection");
+  } else if (user.role === "admin") {
+    content = <AdminDashboard />;
+  } else if (user.role === "merchant") {
+    content = <MerchantDashboard />;
+  } else if (user.role === "customer") {
+    content = <CustomerDashboard />;
+  }
 
-    return(
-        <div>
-            <p>Loading..</p>
-        </div>
-    )
+  return <div>{content}</div>;
 }

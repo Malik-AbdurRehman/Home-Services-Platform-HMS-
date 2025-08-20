@@ -22,17 +22,18 @@ model User {
   imageUrl     String?
   address      String?
   about        String?
-  Request     Request[]
+  type      String?
+  Service     Service[]
 }
 
-model Request {
+model Service {
   id          String   @id @default(cuid())
   userId      String
   description String
   type        String
   charges    Float
   requiredExperience Int
-  status      String   @default("pending")
+  status      String   @default("new")
   createdAt   DateTime @default(now())
   assignedTo  String?
   user        User     @relation(fields: [userId], references: [clerkUserId])

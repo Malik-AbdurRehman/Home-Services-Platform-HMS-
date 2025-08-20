@@ -1,4 +1,3 @@
-// src/app/api/clerk-webhook/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
@@ -15,6 +14,7 @@ export async function POST(req: NextRequest) {
     const role = public_metadata?.role || "";
     const address = public_metadata?.address || "N/A";
     const about = public_metadata?.about || "N/A";
+    const type = public_metadata?.type || "";
 
 
     const existingUserByEmail = await prisma.user.findUnique({ where: { email } });
@@ -29,6 +29,7 @@ if (existingUserByEmail) {
       imageUrl: image_url || "",
       address,
       about,
+      type,
     },
   });
 } else {
@@ -41,6 +42,7 @@ if (existingUserByEmail) {
       imageUrl: image_url || "",
       address,
       about,
+      type,
     },
   });
 }
