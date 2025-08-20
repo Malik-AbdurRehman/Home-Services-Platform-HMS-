@@ -22,7 +22,7 @@ model User {
   imageUrl     String?
   address      String?
   about        String?
-  type      String?
+  serviceType      String?
   Request     Request[]
 }
 
