@@ -25,5 +25,8 @@ export const handleSubmitAction = async (formData: FormData) => {
       type: 'N/A',
     }
     })
+    if(role === 'merchant') {
+      redirect('components/merchantServiceTypeSelection');
+    }
     redirect('/dashboard');
 };

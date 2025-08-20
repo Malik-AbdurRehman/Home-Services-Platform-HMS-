@@ -23,16 +23,16 @@ model User {
   address      String?
   about        String?
   type      String?
-  Service     Service[]
+  Request     Request[]
 }
 
-model Service {
+model Request {
   id          String   @id @default(cuid())
   userId      String
   description String
   type        String
   charges    Float
-  requiredExperience Int
+  requiredExperience Float
   status      String   @default("new")
   createdAt   DateTime @default(now())
   assignedTo  String?
